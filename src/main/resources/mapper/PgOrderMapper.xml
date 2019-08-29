@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.plat.paygate.shop.dao.PgOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.plat.paygate.shop.domain.PgOrder" >
+    <id column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="tb_order_id" property="tbOrderId" jdbcType="VARCHAR" />
+    <result column="buyer_name" property="buyerName" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="order_state" property="orderState" jdbcType="TINYINT" />
+    <result column="approval_user_id" property="approvalUserId" jdbcType="VARCHAR" />
+    <result column="approval_user_name" property="approvalUserName" jdbcType="VARCHAR" />
+    <result column="approve_account_name" property="approveAccountName" jdbcType="VARCHAR" />
+    <result column="settle_id" property="settleId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, tb_order_id, buyer_name, amount, order_state, approval_user_id, approval_user_name, 
+    approve_account_name, settle_id, create_time, update_time, remark
+  </sql>
+
+
+</mapper>
