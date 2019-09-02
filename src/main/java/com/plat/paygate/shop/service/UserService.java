@@ -12,4 +12,16 @@ import com.plat.paygate.shop.dto.UserRegistDto;
 public interface UserService {
 
     BaseResponse insert(UserRegistDto userRegistDto);
+
+
+    /**
+     * 加入我们
+     * @param userName
+     * @param tel
+     * @param qqNumber
+     * @param alipayNo
+     * @param openId
+     * @return
+     */
+    BaseResponse joinus(String userName,String tel,String qqNumber,String alipayNo,String openId);
 }

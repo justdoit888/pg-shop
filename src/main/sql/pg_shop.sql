@@ -101,13 +101,13 @@ CREATE TABLE `pg_settle` (
 DROP TABLE IF EXISTS `pg_user`;
 
 CREATE TABLE `pg_user` (
-  `user_id` bigint(20) NOT NULL COMMENT '自增主键，起始值1000',
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键，起始值1000',
   `user_name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '用户名（手机号）',
   `account_name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '账户姓名',
   `account_no` varchar(40) COLLATE utf8_bin DEFAULT NULL COMMENT '支付宝结算账户号',
   `address` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '地址',
-  `password` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '密码',
-  `role` tinyint(4) DEFAULT NULL COMMENT '角色：1-超级管理员、2-客服、程序员',
+  `password` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '密码',
+  `role` INT (4) DEFAULT NULL COMMENT '角色：1-超级管理员、2-客服、程序员',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日期',
   PRIMARY KEY (`user_id`)

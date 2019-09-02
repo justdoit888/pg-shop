@@ -1,13 +1,19 @@
 package com.plat.paygate.shop.service.impl;
 
 import com.plat.paygate.shop.common.BaseResponse;
+import com.plat.paygate.shop.common.ConstCode;
 import com.plat.paygate.shop.common.ResultEnum;
+import com.plat.paygate.shop.common.RoleEnum;
+import com.plat.paygate.shop.common.utils.MD5Util;
+import com.plat.paygate.shop.domain.PgUser;
 import com.plat.paygate.shop.dto.UserRegistDto;
 import com.plat.paygate.shop.mapper.PgUserMapper;
 import com.plat.paygate.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * @author Sunny
@@ -40,4 +46,28 @@ public class UserServiceImpl implements UserService {
 
         return response;
     }
+
+    @Override
+    public BaseResponse joinus(String userName, String tel, String qqNumber, String alipayNo, String openId) {
+        PgUser user = userMapper.queryByOpenId(openId);
+        if(user != null){
+            return new BaseResponse(ResultEnum.USER_EXIST.getCode(), ResultEnum.USER_EXIST.getDesc());
+        }
+        user = new PgUser();
+        user.setUserName(tel);
+        user.setAccountName(userName);
+        user.setAccountNo(alipayNo);
+        user.setOpenid(openId);
+        user.setQqNumber(qqNumber);
+        user.setRole(RoleEnum.PROGRAMMER.getCode());
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
+        user.setIsDel(ConstCode.UN_DEL);
+        //默认密码为123456
+        user.setPassword(MD5Util.getMD5("123456"));
+        userMapper.insert(user);
+        return new BaseResponse(ResultEnum.USER_EXIST.getCode(), ResultEnum.USER_EXIST.getDesc());
+    }
+
+
 }

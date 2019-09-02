@@ -1,0 +1,68 @@
+/* pages/login/joinus.wxss */
+page{
+  height: 100%;
+}
+.root{
+  height: 100%;
+  width: 100%;
+}
+.name{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.name_input{
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+  margin-left: 24%;
+}
+.tel{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.tel_input{
+  margin-left: 20%;
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+}
+.qq{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.qq_input{
+  margin-left: 11%;
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+}
+.alipay{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.alipay_input{
+  margin-left: 2%;
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+}
+.button{
+  margin-left: 10%;
+ 
+}
+.button_text{
+  background-color: red;
+  width: 50%;
+}

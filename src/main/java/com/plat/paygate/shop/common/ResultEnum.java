@@ -13,7 +13,7 @@ public enum ResultEnum {
     USER_EXIST("200001", "此用户已经注册"),
     PASS_UNCONSISTEN("400001", "密码不一致"),
     SERVICE_EXCEPTION("500000","服务端系统异常"),
-
+    LACK_OF_PARAM("999999","参数缺失"),
     ;
     private String code;
     private String desc;

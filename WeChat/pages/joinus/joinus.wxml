@@ -1,0 +1,23 @@
+<view class='root'>
+  <view class='name'>
+    <text>姓名: </text>
+    <input class='name_input' style="padding-left:10px;font-size:18px;confirm-type:search" value='{{inputname}}' bindinput="nameinput"></input>
+  </view>
+  <view class='tel'>
+    <text>手机：</text>
+    <input class='tel_input' style="padding-left:10px;font-size:18px;confirm-type:search" value="{{inputtel}}" bindinput="telinput"></input>
+  </view>
+  <view class='qq'>
+    <text>接单QQ：</text>
+    <input class='qq_input' style="padding-left:10px;font-size:18px;confirm-type:search" value="{{inputqq}}" bindinput="qqinput"> 
+     </input> 
+  </view>
+  <view class='alipay'>
+    <text>支付宝账号：</text>
+    <input class='alipay_input' style="padding-left:10px;font-size:18px;confirm-type:search" value="{{inputalipay}}" bindinput="alipayinput"> 
+     </input> 
+  </view>
+  <view class='button'>
+    <button class='button_text' bindtap='taphandle'>提交</button>
+  </view>
+</view>
