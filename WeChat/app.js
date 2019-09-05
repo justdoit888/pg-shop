@@ -11,8 +11,8 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         var self = this;
-        var name = wx.getStorageSync('uid');
-        if (name == '' || name == null || wx.getStorageSync('uid') != wx.getStorageSync('key')){
+        var openId = wx.getStorageSync('openId');
+        if (openId == '' || openId == null){
           wx.request({
             url: 'http://localhost:8080/wechat/getOpenId',
             data:{
@@ -23,11 +23,18 @@ App({
             },
             method: 'POST',
             success:function(result){
-              console.log(result.data);
-              var snc = wx.setStorageSync('openId', result.data.data);
-              
+              if(result.data.code == '200000'){
+                wx.setStorageSync('openId', result.data.data);
+              }else{
+                wx.setStorageSync('openId', result.data.data.openid);
+                wx.setStorageSync('currUser',result.data.data);
+              }            
             }
           })
+        }else{
+          this.userInfoReadyCallback = res => {
+            self._saveUserInfo(res.userInfo);
+          }
         }
       }
     })
@@ -53,6 +60,24 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+  },
+  _saveUserInfo: function (user) {
+    this.globalData.userInfo = user;
+  },
+  loadCurrUser: function(){
+    wx.request({
+      url: 'http://localhost:8080/wechat/queryCurrUser',
+      data: {
+        "openId": wx.getStorageSync('openId')
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      success: function (result) {
+        wx.setStorageSync('currUser', result.data.data);
+      }
+    })
   }
 })

@@ -1,6 +1,7 @@
 package com.plat.paygate.shop.service;
 
 import com.plat.paygate.shop.common.BaseResponse;
+import com.plat.paygate.shop.domain.PgUser;
 import com.plat.paygate.shop.dto.UserRegistDto;
 
 /**
@@ -23,5 +24,13 @@ public interface UserService {
      * @param openId
      * @return
      */
-    BaseResponse joinus(String userName,String tel,String qqNumber,String alipayNo,String openId);
+    BaseResponse joinus(String userName,String tel,String qqNumber,String alipayNo,String openId,Integer role);
+
+
+    /**
+     * 根据openID查询
+     * @param openId
+     * @return
+     */
+    PgUser queryByOpenId(String openId);
 }

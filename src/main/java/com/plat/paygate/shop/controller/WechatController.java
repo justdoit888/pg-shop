@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.plat.paygate.shop.common.BaseResponse;
 import com.plat.paygate.shop.common.ResultEnum;
 import com.plat.paygate.shop.common.utils.HttpUtil;
+import com.plat.paygate.shop.domain.PgUser;
 import com.plat.paygate.shop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +54,30 @@ public class WechatController {
         }
         String openId = object.get("openid").toString();
         log.info("openId:{}",openId);
-        response.setData(openId);
+        PgUser user = userService.queryByOpenId(openId);
+        if(null != user){
+            response.setCode(ResultEnum.ALREADY_JOIN.getCode());
+            response.setDesc(ResultEnum.ALREADY_JOIN.getDesc());
+            response.setData(user);
+        }else{
+            response.setData(openId);
+        }
         return response;
     }
 
+
+    /**
+     * 根据openId查询当前登录用户
+     * @param openId
+     * @return
+     */
+    @RequestMapping("/queryCurrUser")
+    public BaseResponse queryCurrUser(String openId){
+        BaseResponse response = new BaseResponse(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getDesc());
+        PgUser user = userService.queryByOpenId(openId);
+        response.setData(user);
+        return response;
+    }
 
     /**
      * 加入我们
@@ -68,7 +89,7 @@ public class WechatController {
      * @return
      */
     @RequestMapping("/joinus")
-    public BaseResponse joinus(String userName,String tel,String qqNumber,String alipayNo,String openId){
+    public BaseResponse joinus(String userName,String tel,String qqNumber,String alipayNo,String openId,Integer role){
         log.info("userName:{},tel:{},qqNumber:{},alipayNo:{},openId:{}",userName,tel,qqNumber,alipayNo,openId);
         BaseResponse response = new BaseResponse(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getDesc());
         if(StringUtils.isEmpty(userName)){
@@ -87,7 +108,7 @@ public class WechatController {
             response.setDesc("支付宝账号不能为空");
             return response;
         }
-        return userService.joinus(userName, tel, qqNumber, alipayNo, openId);
+        return userService.joinus(userName, tel, qqNumber, alipayNo, openId,role);
     }
 
 }

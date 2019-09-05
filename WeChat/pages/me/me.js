@@ -1,54 +1,93 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
+// pages/me/me.js
+const app = getApp();
 Page({
+
+  // 页面的初始数据
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    isShowUserName: false,
+    userInfo: null,
+    role : null,
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
+
+  // button获取用户信息
+  onGotUserInfo: function (e) {
+    if (e.detail.userInfo) {
+      var user = e.detail.userInfo;
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        isShowUserName: true,
+        userInfo: e.detail.userInfo,
       })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
+      user.openid = app.globalData.openid;
+      app._saveUserInfo(user);
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+      wx.showToast({
+        title: '登陆需要允许授权',
+        icon: 'none',
+        success: function () {
+          setTimeout(function () {
+            wx.switchTab({
+              url: '../me/me',
+            })
+          }, 1000)
         }
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+
+  goToMyOrder: function () {
+    wx.navigateTo({
+      url: '../myOrder/myOrder',
     })
+  },
+
+  goToModifyInfo: function () {
+    wx.navigateTo({
+      url: '../modifyInfo/modifyInfo',
+    })
+  },
+  goToCancelAccount: function () {
+    wx.navigateTo({
+      url: '../cancelAccount/cancelAccount',
+    })
+  },
+  goToEnterOrder: function () {
+    wx.navigateTo({
+      url: '../enterOrder/enterOrder',
+    })
+  },
+  goToSettleInfo: function () {
+    wx.navigateTo({
+      url: '../settleInfo/settleInfo',
+    })
+  },
+  //生命周期函数--监听页面加载
+  onLoad: function (options) {
+    var that = this;
+    var user = app.globalData.userInfo;
+    if (user) {
+      that.setData({
+       isShowUserName: true,
+       userInfo: user,
+      })
+    } else {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        that.setData({
+          userInfo: res.userInfo,
+          isShowUserName: true
+        })
+      }
+    }
+  },
+  onShow : function(){
+    var that = this;
+    var currUser = wx.getStorageSync('currUser');
+    var role = currUser == null || currUser == "" ? -1 : currUser.role;
+    if (role != null) {
+      that.setData({
+        role: role
+      })
+    }
   }
 })

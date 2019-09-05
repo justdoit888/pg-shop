@@ -1,6 +1,5 @@
 package com.plat.paygate.shop.common;
 
-import org.springframework.http.HttpStatus;
 
 /**
  * @author Sunny
@@ -14,6 +13,8 @@ public enum ResultEnum {
     PASS_UNCONSISTEN("400001", "密码不一致"),
     SERVICE_EXCEPTION("500000","服务端系统异常"),
     LACK_OF_PARAM("999999","参数缺失"),
+    ALREADY_JOIN("999990","已经加入，无需重新加入"),
+    NOT_JOIN("999991","还未加入"),
     ;
     private String code;
     private String desc;

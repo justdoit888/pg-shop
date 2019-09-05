@@ -13,7 +13,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    banner:[
+      '/images/banner1.jpeg',
+      '/images/banner2.jpg',
+      '/images/banner3.jpeg'
+    ]
   },
 
   /**

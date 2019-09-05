@@ -1,10 +1,14 @@
 {
   "pages": [
-    "pages/me/me",
     "pages/index/index",
+    "pages/me/me",
     "pages/logs/logs",
-    "pages/list/list",
-    "pages/joinus/joinus"
+    "pages/joinus/joinus",
+    "pages/myOrder/myOrder",
+    "pages/modifyInfo/modifyInfo",
+    "pages/cancelAccount/cancelAccount",
+    "pages/enterOrder/enterOrder",
+    "pages/settleInfo/settleInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,7 +20,7 @@
     "color": "#a9b7b7",
     "selectedColor": "#11cd6e",
     "borderStyle": "white",
-    "backgroundColor":"white",
+    "backgroundColor": "white",
     "list": [
       {
         "selectedIconPath": "images/home_yes.png",

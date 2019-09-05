@@ -48,10 +48,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public BaseResponse joinus(String userName, String tel, String qqNumber, String alipayNo, String openId) {
+    public BaseResponse joinus(String userName, String tel, String qqNumber, String alipayNo, String openId,Integer role) {
         PgUser user = userMapper.queryByOpenId(openId);
         if(user != null){
-            return new BaseResponse(ResultEnum.USER_EXIST.getCode(), ResultEnum.USER_EXIST.getDesc());
+            return new BaseResponse(ResultEnum.ALREADY_JOIN.getCode(), ResultEnum.ALREADY_JOIN.getDesc());
         }
         user = new PgUser();
         user.setUserName(tel);
@@ -59,15 +59,18 @@ public class UserServiceImpl implements UserService {
         user.setAccountNo(alipayNo);
         user.setOpenid(openId);
         user.setQqNumber(qqNumber);
-        user.setRole(RoleEnum.PROGRAMMER.getCode());
+        user.setRole(role);
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         user.setIsDel(ConstCode.UN_DEL);
         //默认密码为123456
         user.setPassword(MD5Util.getMD5("123456"));
         userMapper.insert(user);
-        return new BaseResponse(ResultEnum.USER_EXIST.getCode(), ResultEnum.USER_EXIST.getDesc());
+        return new BaseResponse(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getDesc());
     }
 
-
+    @Override
+    public PgUser queryByOpenId(String openId) {
+        return userMapper.queryByOpenId(openId);
+    }
 }

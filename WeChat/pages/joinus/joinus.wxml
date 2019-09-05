@@ -3,6 +3,7 @@
     <text>姓名: </text>
     <input class='name_input' style="padding-left:10px;font-size:18px;confirm-type:search" value='{{inputname}}' bindinput="nameinput"></input>
   </view>
+ 
   <view class='tel'>
     <text>手机：</text>
     <input class='tel_input' style="padding-left:10px;font-size:18px;confirm-type:search" value="{{inputtel}}" bindinput="telinput"></input>
@@ -16,6 +17,15 @@
     <text>支付宝账号：</text>
     <input class='alipay_input' style="padding-left:10px;font-size:18px;confirm-type:search" value="{{inputalipay}}" bindinput="alipayinput"> 
      </input> 
+  </view>
+   <view class='select_box'>
+    <text>角色：</text>
+    <view class='select' catchtap='selectTap'>
+        <text class='select_text'>{{selectData[index]}}</text>        
+    </view>
+    <view class='option_box' style='height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+        <text class='option' style='{{index==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+    </view>
   </view>
   <view class='button'>
     <button class='button_text' bindtap='taphandle'>提交</button>
