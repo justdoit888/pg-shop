@@ -11,14 +11,14 @@
     <result column="approval_user_name" property="approvalUserName" jdbcType="VARCHAR" />
     <result column="approve_account_name" property="approveAccountName" jdbcType="VARCHAR" />
     <result column="settle_id" property="settleId" jdbcType="BIGINT" />
+    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     order_id, tb_order_id, buyer_name, amount, order_state, approval_user_id, approval_user_name, 
-    approve_account_name, settle_id, create_time, update_time, remark
+    approve_account_name, settle_id, order_time,create_time, update_time, remark
   </sql>
-
 
 </mapper>

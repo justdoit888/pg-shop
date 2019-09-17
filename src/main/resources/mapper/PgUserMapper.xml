@@ -3,7 +3,7 @@
 <mapper namespace="com.plat.paygate.shop.mapper.PgUserMapper" >
   <resultMap id="BaseResultMap" type="com.plat.paygate.shop.domain.PgUser" >
     <id column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
     <result column="qq_number" property="qqNumber" jdbcType="VARCHAR" />
     <result column="account_name" property="accountName" jdbcType="VARCHAR" />
     <result column="account_no" property="accountNo" jdbcType="VARCHAR" />
@@ -16,7 +16,7 @@
     <result column="is_del" property="isDel" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, user_name, qq_number, account_name, account_no, address, password, openId, 
+    user_id, tel, qq_number, account_name, account_no, address, password, openId,
     role, create_time, update_time, is_del
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -30,12 +30,12 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.plat.paygate.shop.domain.PgUser" >
-    insert into pg_user (user_id, user_name, qq_number, 
+    insert into pg_user (user_id, tel, qq_number,
       account_name, account_no, address, 
       password, openId, role, 
       create_time, update_time, is_del
       )
-    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{qqNumber,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=BIGINT}, #{tel,jdbcType=VARCHAR}, #{qqNumber,jdbcType=VARCHAR},
       #{accountName,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=VARCHAR}
@@ -47,8 +47,8 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="userName != null" >
-        user_name,
+      <if test="tel != null" >
+        tel,
       </if>
       <if test="qqNumber != null" >
         qq_number,
@@ -85,8 +85,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
       </if>
       <if test="qqNumber != null" >
         #{qqNumber,jdbcType=VARCHAR},
@@ -123,8 +123,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.plat.paygate.shop.domain.PgUser" >
     update pg_user
     <set >
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
       </if>
       <if test="qqNumber != null" >
         qq_number = #{qqNumber,jdbcType=VARCHAR},
@@ -161,7 +161,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.plat.paygate.shop.domain.PgUser" >
     update pg_user
-    set user_name = #{userName,jdbcType=VARCHAR},
+    set tel = #{tel,jdbcType=VARCHAR},
       qq_number = #{qqNumber,jdbcType=VARCHAR},
       account_name = #{accountName,jdbcType=VARCHAR},
       account_no = #{accountNo,jdbcType=VARCHAR},

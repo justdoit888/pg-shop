@@ -8,7 +8,8 @@
     "pages/modifyInfo/modifyInfo",
     "pages/cancelAccount/cancelAccount",
     "pages/enterOrder/enterOrder",
-    "pages/settleInfo/settleInfo"
+    "pages/settleInfo/settleInfo",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

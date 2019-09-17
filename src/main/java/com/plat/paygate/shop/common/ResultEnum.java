@@ -15,6 +15,7 @@ public enum ResultEnum {
     LACK_OF_PARAM("999999","参数缺失"),
     ALREADY_JOIN("999990","已经加入，无需重新加入"),
     NOT_JOIN("999991","还未加入"),
+    INVALID_USER("000000","非法的用户"),
     ;
     private String code;
     private String desc;

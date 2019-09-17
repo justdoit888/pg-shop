@@ -5,6 +5,7 @@ import com.plat.paygate.shop.common.BaseResponse;
 import com.plat.paygate.shop.common.ResultEnum;
 import com.plat.paygate.shop.common.utils.HttpUtil;
 import com.plat.paygate.shop.domain.PgUser;
+import com.plat.paygate.shop.service.OrderService;
 import com.plat.paygate.shop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class WechatController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
     /**
      * 根据code获取微信用户openId
      * @param code
@@ -111,4 +115,15 @@ public class WechatController {
         return userService.joinus(userName, tel, qqNumber, alipayNo, openId,role);
     }
 
+
+    /**
+     * 根据状态查询订单
+     * @param openId
+     * @param status
+     * @return
+     */
+    @RequestMapping("/listOrderByStatus")
+    public BaseResponse listOrderByStatus(String openId,Integer status){
+        return orderService.listOrderByStatus(openId,status);
+    }
 }

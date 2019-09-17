@@ -15,7 +15,7 @@ public class PgOrder {
 
     private BigDecimal amount;
 
-    private Byte orderState;
+    private Integer orderState;
 
     private String approvalUserId;
 
@@ -24,6 +24,8 @@ public class PgOrder {
     private String approveAccountName;
 
     private Long settleId;
+
+    private Date orderTime;
 
     private Date createTime;
 

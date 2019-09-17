@@ -1,0 +1,41 @@
+<view class="navbar">
+ <lable wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">
+  <text>{{item}}</text>
+ </lable>
+</view>
+<view wx:if="{{list.length>0}}">
+ <!-- 外层 -->
+ <view class='cont_count' wx:for="{{list}}" wx:key="key">
+  <!-- 编号 -->
+  <view class='seria'>
+   <label class='seriac_name'>
+    订单号:
+    <text>{{item.orderId}}</text>
+   </label>
+   <!-- 订单状态 -->
+   <label class='seriac_start'>
+    订单状态:
+    <text>{{item.orderStateStr}}</text>
+   </label>
+   <label class='seriac_orderTime'>
+    订单时间:
+    <text>{{item.orderTime}}</text>
+   </label>
+   <label class='seriac_amount'>
+    订单金额:
+    <text>{{item.amount}}</text>
+   </label>
+   <label class='seriac_remark'>
+    备注:
+    <text>{{item.remark}}</text>
+   </label>
+   <label class='seriac_detail'>
+    <view class='right_arrow' bindtap="goToOrderDetail"/>
+   </label>
+  </view>
+ </view>
+</view>
+<!-- 否则 -->
+<view wx:else class='cont_count'>
+ <label class='none_tab'>数据为空哦~~</label>
+</view>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.plat.paygate.shop.dao.PgProgrammerOrderMapper" >
+<mapper namespace="com.plat.paygate.shop.mapper.PgProgrammerOrderMapper" >
   <resultMap id="BaseResultMap" type="com.plat.paygate.shop.domain.PgProgrammerOrder" >
     <id column="order_id" property="orderId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
@@ -13,6 +13,28 @@
   <sql id="Base_Column_List" >
     order_id, user_id, user_name, account_name, account_no, settle_amount, rate
   </sql>
-
+  <select id="listOrderByStatus" parameterType="java.lang.Object" resultType="com.plat.paygate.shop.dto.OrderListDto">
+    SELECT
+      pgo.order_id,
+      pgo.user_id,
+      pgo.user_name,
+      pgo.account_no,
+      po.tb_order_id,
+      po.order_state,
+      po.amount,
+      po.order_time,
+      po.remark
+    from pg_programmer_order pgo
+    INNER join pg_order po on pgo.order_id = po.order_id
+    <where>
+      <if test="userId != null">
+        and pgo.user_id = #{userId}
+      </if>
+      <if test="orderStatus != null">
+        and po.order_state = #{orderStatus}
+      </if>
+    </where>
+    order by po.order_time desc
+  </select>
 
 </mapper>

@@ -13,10 +13,10 @@ public class PgUser {
     private Long userId;
 
     /** 
-     * 用户名（手机号）
+     * 手机号
      * @Author  zhjs
     **/
-    private String userName;
+    private String tel;
 
     /** 
      * qq号，程序员结单的联系方式

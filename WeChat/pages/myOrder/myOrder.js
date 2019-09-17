@@ -1,13 +1,59 @@
 const app = getApp();
+let orderStatus = 0;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    navbar: ["待核对","待结算","已结算"],
+    currentTab: 0,
+    list: []
   },
 
+  navbarTap: function (e) {
+    let index = e.currentTarget.dataset.idx;
+    this.setData({
+      currentTab: index
+    })
+
+    //0-待核对、1-待结算、2-已结算
+    orderStatus = index;
+    this.getMyOrderList();
+  },
+
+  getMyOrderList() {
+    let that = this;
+    let openid = wx.getStorageSync("openId");
+    if (!openid) {
+      return;
+    }
+    //请求自己后台获取用户openid
+    wx.request({
+      url: 'http://localhost:8080/wechat/listOrderByStatus',
+      data: {
+        openId: openid,
+        status: orderStatus
+      },
+      success: function (res) {
+        if (res && res.data && res.data.data && res.data.data.length > 0) {
+          let dataList = res.data.data;
+          that.setData({
+            list: dataList
+          })
+        } else {
+          that.setData({
+            list: []
+          })
+        }
+      }
+    })
+  },
+  goToOrderDetail: function(){
+    wx.navigateTo({
+      url: '../orderDetail/orderDetail',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -64,7 +110,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getMyOrderList();
   },
 
   /**

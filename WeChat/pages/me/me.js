@@ -6,7 +6,7 @@ Page({
   data: {
     isShowUserName: false,
     userInfo: null,
-    role : null,
+    role : 3,
   },
 
   // button获取用户信息
@@ -82,6 +82,7 @@ Page({
   },
   onShow : function(){
     var that = this;
+    app.loadCurrUser();
     var currUser = wx.getStorageSync('currUser');
     var role = currUser == null || currUser == "" ? -1 : currUser.role;
     if (role != null) {

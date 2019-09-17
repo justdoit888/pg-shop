@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
             return new BaseResponse(ResultEnum.ALREADY_JOIN.getCode(), ResultEnum.ALREADY_JOIN.getDesc());
         }
         user = new PgUser();
-        user.setUserName(tel);
+        user.setTel(tel);
         user.setAccountName(userName);
         user.setAccountNo(alipayNo);
         user.setOpenid(openId);
