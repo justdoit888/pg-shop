@@ -30,7 +30,7 @@
     <text>{{item.remark}}</text>
    </label>
    <label class='seriac_detail'>
-    <view class='right_arrow' bindtap="goToOrderDetail"/>
+    <view class='right_arrow' bindtap="goToOrderDetail" data-id="{{item.orderId}}"/>
    </label>
   </view>
  </view>

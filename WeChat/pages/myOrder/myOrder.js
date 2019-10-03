@@ -49,7 +49,8 @@ Page({
       }
     })
   },
-  goToOrderDetail: function(){
+  goToOrderDetail: function(e){
+    console.log(e.currentTarget.dataset.id);
     wx.navigateTo({
       url: '../orderDetail/orderDetail',
     })
