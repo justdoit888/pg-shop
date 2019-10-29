@@ -1,2 +1,41 @@
-<!--pages/orderDetail/orderDetail.wxml-->
-<text>pages/orderDetail/orderDetail.wxml</text>
+<view>
+  <!-- 编号 -->
+  <view class='seria'>
+   <label class='seriac_name'>
+    订单号:
+    <text>{{orderDetail.orderId}}</text>
+   </label>
+   <!-- 订单状态 -->
+   <label class='seriac_start'>
+    订单状态:
+    <text>{{orderDetail.orderStateStr}}</text>
+   </label>
+   <label class='seriac_orderTime'>
+    订单时间:
+    <text>{{orderDetail.orderTime}}</text>
+   </label>
+   <label class='seriac_amount'>
+    订单金额:
+    <text>{{orderDetail.amount}}</text>
+   </label>
+   <label class='seriac_remark'>
+    备注:
+    <text>{{orderDetail.remark}}</text>
+   </label>
+  </view>
+  <view class='seria'>
+   <label class='seriac_name'>
+    结算金额:
+    <text>{{orderDetail.settleAmount}}</text>
+   </label>
+   <!-- 订单状态 -->
+   <label class='seriac_start'>
+    录入时间:
+    <text>{{orderDetail.enterTime}}</text>
+   </label>
+   <label class='seriac_orderTime'>
+    淘宝订单号:
+    <text>{{orderDetail.tbOrderId}}</text>
+   </label>
+  </view>
+ </view>

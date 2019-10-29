@@ -118,12 +118,43 @@ public class WechatController {
 
     /**
      * 根据状态查询订单
-     * @param openId
+     * @param userId
      * @param status
      * @return
      */
     @RequestMapping("/listOrderByStatus")
-    public BaseResponse listOrderByStatus(String openId,Integer status){
-        return orderService.listOrderByStatus(openId,status);
+    public BaseResponse listOrderByStatus(Long userId,Integer status,Integer role){
+        if(null == userId){
+            return new BaseResponse(ResultEnum.INVALID_USER.getCode(),ResultEnum.INVALID_USER.getDesc());
+        }
+        return orderService.listOrderByStatus(userId,status,role);
+    }
+
+
+    /**
+     * 订单详情
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/queryOrderDetailByOrderId")
+    public BaseResponse queryOrderDetailByOrderId(Long orderId,Integer role){
+        return orderService.queryOrderDetailByOrderId(orderId, role);
+    }
+
+
+    /**
+     * 订单录入
+     * @param tbOrderId  淘宝订单id
+     * @param buyerName  买家用户名
+     * @param amount     订单金额
+     * @param csUserId   客服用户id
+     * @param orderDate  订单时间
+     * @param tel        程序员手机号
+     * @param remark     备注
+     * @return
+     */
+    @RequestMapping("/enterOrder")
+    public BaseResponse enterOrder(String tbOrderId,String buyerName,String amount,Long csUserId,String orderDate,String tel,String remark){
+        return orderService.enterOrder(tbOrderId, buyerName, amount, csUserId,orderDate,tel, remark);
     }
 }

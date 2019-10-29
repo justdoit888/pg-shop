@@ -12,6 +12,8 @@ public class PgCsOrder {
 
     private String userName;
 
+    private Long settleId;
+
     private String accountName;
 
     private String accountNo;
@@ -19,4 +21,17 @@ public class PgCsOrder {
     private BigDecimal settleAmount;
 
     private BigDecimal rate;
+
+    /**
+     * 结算金额  转为double类型   定时任务lambda表达式中计算总和使用
+     */
+    private Double amount;
+
+    public Double getAmount() {
+        return settleAmount.doubleValue();
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 }

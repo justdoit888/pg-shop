@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.plat.paygate.shop.dao.PgOrderMapper" >
+<mapper namespace="com.plat.paygate.shop.mapper.PgOrderMapper" >
   <resultMap id="BaseResultMap" type="com.plat.paygate.shop.domain.PgOrder" >
     <id column="order_id" property="orderId" jdbcType="BIGINT" />
     <result column="tb_order_id" property="tbOrderId" jdbcType="VARCHAR" />
@@ -20,5 +20,104 @@
     order_id, tb_order_id, buyer_name, amount, order_state, approval_user_id, approval_user_name, 
     approve_account_name, settle_id, order_time,create_time, update_time, remark
   </sql>
+
+  <select id = "loadById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    from pg_order
+    where order_id = #{orderId}
+  </select>
+  <select id="queryOrderIdByDate" resultType="java.lang.Long">
+    SELECT
+      order_id
+    from pg_order
+    where order_time >= #{startTime} and order_time &lt; #{endTime}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.plat.paygate.shop.domain.PgOrder" >
+    insert into pg_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="tbOrderId != null" >
+        tb_order_id,
+      </if>
+      <if test="buyerName != null" >
+        buyer_name,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="approvalUserId != null" >
+        approval_user_id,
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name,
+      </if>
+      <if test="approveAccountName != null" >
+        approve_account_name,
+      </if>
+      <if test="settleId != null" >
+        settle_id,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="tbOrderId != null" >
+        #{tbOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerName != null" >
+        #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=TINYINT},
+      </if>
+      <if test="approvalUserId != null" >
+        #{approvalUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalUserName != null" >
+        #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveAccountName != null" >
+        #{approveAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="settleId != null" >
+        #{settleId,jdbcType=BIGINT},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
 
 </mapper>

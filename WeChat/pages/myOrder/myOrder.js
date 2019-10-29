@@ -27,13 +27,16 @@ Page({
     let openid = wx.getStorageSync("openId");
     if (!openid) {
       return;
-    }
+    } 
+    var currUser = wx.getStorageSync('currUser');
+    console.log(currUser);
     //请求自己后台获取用户openid
     wx.request({
       url: 'http://localhost:8080/wechat/listOrderByStatus',
       data: {
-        openId: openid,
-        status: orderStatus
+        userId: currUser.userId,
+        status: orderStatus,
+        role: currUser.role
       },
       success: function (res) {
         if (res && res.data && res.data.data && res.data.data.length > 0) {
@@ -50,9 +53,8 @@ Page({
     })
   },
   goToOrderDetail: function(e){
-    console.log(e.currentTarget.dataset.id);
     wx.navigateTo({
-      url: '../orderDetail/orderDetail',
+      url: '../orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id,
     })
   },
   /**

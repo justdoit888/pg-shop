@@ -181,4 +181,16 @@
     where openId = #{openId} and is_del = 0
     limit 1
   </select>
+  <select id="queryByTel" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    from pg_user
+    where tel = #{tel}
+  </select>
+  <select id="queryAllUserIdByRole" resultType="java.lang.Long">
+    SELECT
+      user_id
+    from pg_user
+    where role = #{role} and is_del = '0'
+  </select>
 </mapper>

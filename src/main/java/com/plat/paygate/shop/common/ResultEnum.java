@@ -16,6 +16,7 @@ public enum ResultEnum {
     ALREADY_JOIN("999990","已经加入，无需重新加入"),
     NOT_JOIN("999991","还未加入"),
     INVALID_USER("000000","非法的用户"),
+    NOT_EXIST_USER("000001"," 不存在的用户"),
     ;
     private String code;
     private String desc;

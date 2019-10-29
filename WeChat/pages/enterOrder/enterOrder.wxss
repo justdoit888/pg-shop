@@ -1,1 +1,182 @@
-/* pages/enterOrder/enterOrder.wxss */
+/* pages/login/joinus.wxss */
+page{
+  height: 100%;
+}
+.root{
+  height: 100%;
+  width: 100%;
+}
+.name{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.name_input{
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+  margin-left:22%;
+}
+.tel{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.tel_input{
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+  margin-left: 18px;
+}
+.qq{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.qq_input{
+  margin-left: 13%;
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+}
+.orderDate{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.orderDate_input{
+  margin-left: 13%;
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+}
+.alipay{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.alipay_input{
+  margin-left: 1%;
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+}
+.remark{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.remark_input{
+  margin-left: 25%;
+  height: 5%;
+  width: 50%;
+  border: 1px solid black;
+}
+.button{
+  margin-left: 10%;
+  margin-top: 20%;
+}
+.button_text{
+  background-color: red;
+  width: 50%;
+}
+
+.select_box{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  position: relative;
+}
+.select{
+  box-sizing: border-box;
+  width: 56%;
+  height: 70rpx;
+  border:1px solid black;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-left: 19%;
+}
+.select_text{
+  font-size: 30rpx;
+  flex: 1;
+}
+.select_img{
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  transition:transform 0.3s;
+}
+.select_img_rotate{
+  transform:rotate(180deg); 
+}
+.option_box{
+  position: absolute;
+  top: 70rpx;
+  width: 100%;
+  box-sizing: border-box;
+  height: 0;
+  overflow-y: auto;
+  border-top: 0;
+  background: #fff;
+  transition: height 0.3s;
+}
+.option{
+  display: block;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  border-bottom: 1px solid #efefef;
+  padding: 10rpx;
+  width: 52%;
+  margin-left:37%;
+}
+
+.time-title{
+ float:left;width:20%;text-align:center;color:#45BCE8
+}
+.picker-text{
+ text-align:center;
+}
+/*mask*/
+.time_screens {
+  
+ width: 100%;
+  
+ position: fixed;
+bottom: 0;
+ left: 0;
+ z-index: 1000;
+ opacity: 0.5;
+ overflow: hidden;
+}
+
+.demo2 {
+    background-image: linear-gradient(to bottom, #2e5d91 0%, #2f3e79 100%);
+    padding-top: 10px;
+    padding-bottom: 10px;    
+}
+
+.demo2-header {
+    font-size: large;
+    color: #3ed7f6;
+}
+
+
+.demo2-board {
+    color: #3ed7f6;
+}

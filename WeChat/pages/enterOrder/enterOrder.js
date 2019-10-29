@@ -1,13 +1,15 @@
 // pages/enterOrder/enterOrder.js
 const app = getApp();
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
   },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -101,5 +103,72 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  nameinput: function (e) {
+    this.setData({
+      inputname: e.detail.value
+    })
+  },
+  telinput: function (e) {
+    this.setData({
+      inputtel: e.detail.value
+    })
+  },
+  qqinput: function (e) {
+    this.setData({
+      inputqq: e.detail.value
+    })
+  },
+  alipayinput: function (e) {
+    this.setData({
+      inputalipay: e.detail.value
+    })
+  },
+  remarkinput: function (e) {
+    this.setData({
+      inputremark: e.detail.value
+    })
+  },
+  orderDateinput: function(e){
+    this.setData({
+      inputorderDate: e.detail.value
+    })
+  },
+  taphandle: function () {
+    var self = this;
+    var currUser = wx.getStorageSync('currUser');
+    wx.request({
+      url: 'http://localhost:8080/wechat/enterOrder',
+      data: {
+        'tbOrderId': self.data.inputname == undefined ? '' : self.data.inputname,
+        'buyerName': self.data.inputtel == undefined ? '' : self.data.inputtel,
+        'amount': self.data.inputqq == undefined ? '' : self.data.inputqq,
+        'orderDate': self.data.inputorderDate == undefined ? '' : self.data.inputorderDate,
+        'tel': self.data.inputalipay == undefined ? '' : self.data.inputalipay,
+        "remark": self.data.inputremark == undefined ? '': self.data.inputremark,
+        "csUserId": currUser.userId
+      },
+      success: function (res) {
+        if (res.data.code != '200000') {
+          wx.showToast({
+            title: res.data.desc,
+            icon: 'none',
+          })
+        } else {
+          wx.showToast({
+            title: "录入成功",
+            icon: 'success',
+            success: function () {
+              app.loadCurrUser();
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }, 1500)
+            }
+          })
+        }
+      }
+    })
   }
 })

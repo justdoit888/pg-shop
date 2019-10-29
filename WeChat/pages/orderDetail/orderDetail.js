@@ -1,18 +1,32 @@
-// pages/orderDetail/orderDetail.js
+const app = getApp();
+let orderDetail = null;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    orderDetail: null
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var currUser = wx.getStorageSync('currUser');
+    var that = this;
+    wx.request({
+      url: 'http://localhost:8080/wechat/queryOrderDetailByOrderId',
+      data: {
+        orderId: options.orderId,
+        role: currUser.role
+      },
+      success: function (res) {
+        console.log(res.data.data);
+        that.setData({
+          orderDetail: res.data.data
+        })
+      }
+    })
   },
 
   /**
@@ -26,7 +40,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+  
   },
 
   /**
