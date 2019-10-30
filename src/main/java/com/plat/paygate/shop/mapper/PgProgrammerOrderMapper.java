@@ -17,7 +17,7 @@ public interface PgProgrammerOrderMapper {
 
     int insertSelective(PgProgrammerOrder record);
 
-    List<PgProgrammerOrder> queryOrderByOrderIds(List<Long> orderIds);
+    List<PgProgrammerOrder> queryOrderByOrderIds(@Param("orderIds") List<Long> orderIds);
 
     void updateSettleIdByUserId(@Param("settleId") Long settleId,@Param("orderIds") List<Long> orderIds,@Param("userId") Long userId);
 }

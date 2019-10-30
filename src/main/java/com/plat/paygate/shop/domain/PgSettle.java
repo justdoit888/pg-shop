@@ -29,7 +29,7 @@ public class PgSettle {
 
     private Date settleDate;
 
-    private Byte settleState;
+    private Integer settleState;
 
     private Date createTime;
 

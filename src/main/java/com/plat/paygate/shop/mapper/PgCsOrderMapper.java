@@ -16,7 +16,7 @@ public interface PgCsOrderMapper {
 
     int insertSelective(PgCsOrder record);
 
-    List<PgCsOrder> queryOrderByOrderIds(List<Long> orderIds);
+    List<PgCsOrder> queryOrderByOrderIds(@Param("orderIds") List<Long> orderIds);
 
     void updateSettleIdByUserId(@Param("settleId") Long settleId,@Param("orderIds") List<Long> orderIds,@Param("userId") Long userId);
 

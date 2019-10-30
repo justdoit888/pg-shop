@@ -1,5 +1,8 @@
 package com.plat.paygate.shop.schedule;
 
+import com.plat.paygate.shop.common.ConstCode;
+import com.plat.paygate.shop.common.ResultEnum;
+import com.plat.paygate.shop.common.exception.ServiceException;
 import com.plat.paygate.shop.common.utils.DateUtils;
 import com.plat.paygate.shop.common.utils.SnowFlake;
 import com.plat.paygate.shop.domain.*;
@@ -7,6 +10,7 @@ import com.plat.paygate.shop.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
@@ -28,6 +32,7 @@ import java.util.stream.Collectors;
  */
 
 @Component
+@Transactional(rollbackFor = Exception.class)
 public class SettleSchedule {
 
     @Autowired
@@ -46,6 +51,7 @@ public class SettleSchedule {
     private PgSettleMapper pgSettleMapper;
 
     @Scheduled(cron = "0 00 20 ? * 0")
+//    @Scheduled(cron = "0 */1 * * * ?")
     public void settleOrder(){
         try{
             //查询当前时间到上周日晚八点的所有订单
@@ -57,7 +63,8 @@ public class SettleSchedule {
                 this.settleCsOrder(orderIds);
             }
         }catch(Exception e){
-
+            e.printStackTrace();
+            throw new ServiceException(ResultEnum.SERVICE_EXCEPTION.getCode(),ResultEnum.SERVICE_EXCEPTION.getDesc(),"");
         }
     }
 
@@ -79,7 +86,7 @@ public class SettleSchedule {
                     BigDecimal settleAmount = new BigDecimal(curr.getValue());
                     Long settleId = SnowFlake.getSnowFlakeId();
                     this.insertSettleInfo(settleId,userId,settleAmount);
-                    //更新程序员表结算
+                    //更新程序员表结算id
                     pgProgrammerOrderMapper.updateSettleIdByUserId(settleId,orderIds,userId);
                 }
             }
@@ -135,6 +142,7 @@ public class SettleSchedule {
         settle.setSettleDate(new Date());
         settle.setCreateTime(new Date());
         settle.setUpdateTime(new Date());
+        settle.setSettleState(ConstCode.ORDER_WAIT_SETTLED);
         pgSettleMapper.insertSelective(settle);
     }
 }

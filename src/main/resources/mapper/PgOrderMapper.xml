@@ -31,7 +31,8 @@
     SELECT
       order_id
     from pg_order
-    where order_time >= #{startTime} and order_time &lt; #{endTime}
+    where  order_state != 2 and
+    order_time >= #{startTime} and order_time &lt; #{endTime}
   </select>
 
   <insert id="insertSelective" parameterType="com.plat.paygate.shop.domain.PgOrder" >
