@@ -3,7 +3,7 @@ package com.plat.paygate.shop.common.exception;
 import lombok.Data;
 
 /**
- * @ClassName: ServiceException
+ * @ClassName: ServiceException111
  * @author: zhjs
  * @createDate: 2019/10/29 下午2:04
  * @JDK: 1.8
